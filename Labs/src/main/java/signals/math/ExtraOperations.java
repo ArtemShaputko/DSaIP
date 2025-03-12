@@ -96,24 +96,7 @@ public class ExtraOperations {
     }
 
     public static double[] correlationFFT(double[] firstSignal, double[] secondSignal) {
-        int initialLength = firstSignal.length + secondSignal.length - 1;
-
-        Complex[] firstPadded = FourierTransform.padToPowerOfTwo(Arrays.copyOf(firstSignal, initialLength));
-        Complex[] secondPadded = FourierTransform.padToPowerOfTwo(Arrays.copyOf(secondSignal, initialLength));
-
-        int paddedLength = firstPadded.length;
-
-        Complex[] firstSignalFft = FourierTransform.fft(firstPadded);
-        Complex[] secondSignalFft = FourierTransform.fft(secondPadded);
-
-        Complex[] product = new Complex[paddedLength];
-        for (int i = 0; i < paddedLength; i++) {
-            product[i] = firstSignalFft[i].conjugate().multiply(secondSignalFft[i]);
-        }
-
-        Complex[] ifftResult = FourierTransform.ifft(product);
-
-        return Arrays.stream(Arrays.copyOf(ifftResult, initialLength)).mapToDouble(num -> num.real).toArray();
+        return convolutionFFT(firstSignal, flip(secondSignal));
     }
 
     public static double[] flip(double[] array) {
