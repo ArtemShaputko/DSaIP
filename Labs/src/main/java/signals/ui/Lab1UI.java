@@ -2,8 +2,8 @@ package signals.ui;
 
 import lombok.AllArgsConstructor;
 import signals.math.FourierTransform;
-import signals.util.DiscreteDrawParams;
-import signals.util.FunctionDrawParams;
+import signals.util.params.DiscreteDrawParams;
+import signals.util.params.FunctionDrawParams;
 import signals.util.SignalPlotter;
 import signals.function.Basis;
 import signals.function.Complex;
@@ -11,6 +11,8 @@ import signals.function.Constants;
 
 import javax.swing.*;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 public class Lab1UI extends PlotterUI {
@@ -53,7 +55,6 @@ public class Lab1UI extends PlotterUI {
                         "Амплитуда"
                 );
                 signalPlotter.setSignal(
-                        Constants.startValue,
                         "АЧХ F(t)",
                         FourierTransform.calculateAmplitudeSpectrum(dftSpectrum),
                         FourierTransform.calculateFrequencies(dftSpectrum, Constants.samplingRate)
@@ -67,7 +68,6 @@ public class Lab1UI extends PlotterUI {
                         "Амплитуда"
                 );
                 signalPlotter.setSignal(
-                        Constants.startValue,
                         "АЧХ F(t)",
                         FourierTransform.calculateAmplitudeSpectrum(fftSpectrum),
                         FourierTransform.calculateFrequencies(fftSpectrum, Constants.samplingRate)
@@ -112,7 +112,6 @@ public class Lab1UI extends PlotterUI {
                         "Амплитуда"
                 );
                 signalPlotter.setSignal(
-                        Constants.startValue,
                         "АЧХ F(t)",
                         FourierTransform.calculateAmplitudeSpectrum(filteredSignal),
                         FourierTransform.calculateFrequencies(filteredSignal, Constants.samplingRate));
@@ -135,6 +134,11 @@ public class Lab1UI extends PlotterUI {
             default:
                 throw new IllegalStateException("Unexpected value: " + option);
         }
+    }
+
+    @Override
+    protected Optional<List<JPanel>> addPanels() {
+        return Optional.empty();
     }
 
     @Override

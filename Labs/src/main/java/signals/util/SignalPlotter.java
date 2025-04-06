@@ -11,6 +11,9 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import signals.util.params.DiscreteDrawParams;
+import signals.util.params.FunctionDrawParams;
+import signals.util.params.SignalDrawParams;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -41,7 +44,7 @@ public class SignalPlotter {
     }
 
     public void setSignal(List<? extends SignalDrawParams> signals) {
-        this.signals.clear();
+        freeSignals();
         for (SignalDrawParams param : signals) {
             if (param instanceof FunctionDrawParams fp) {
                 addSignal(fp);
@@ -53,17 +56,17 @@ public class SignalPlotter {
         }
     }
     public void setSignal(FunctionDrawParams params) {
-        this.signals.clear();
+        freeSignals();
         addSignal(params);
     }
 
-    public void setSignal(double startTime, String label, final double[] signal, final double[] x) {
-        this.signals.clear();
+    public void setSignal(String label, final double[] signal, final double[] x) {
+        freeSignals();
         addSignal(label, signal, x);
     }
 
     public void setSignal(DiscreteDrawParams params) {
-        this.signals.clear();
+        freeSignals();
         addSignal(params);
     }
 

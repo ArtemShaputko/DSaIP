@@ -1,4 +1,4 @@
-package signals.util;
+package signals.util.params;
 
 import signals.function.Function;
 

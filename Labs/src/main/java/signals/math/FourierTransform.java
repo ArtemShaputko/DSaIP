@@ -6,18 +6,6 @@ import java.util.Arrays;
 
 public class FourierTransform {
 
-    // Метод для дополнения массива нулями до ближайшей степени двойки
-    public static Complex[] padToPowerOfTwo(final double[] signal) {
-        int N = signal.length;
-        if ((N & (N - 1)) == 0) {
-            return Arrays.stream(signal).mapToObj(
-                    x -> new Complex(x, 0)).toArray(Complex[]::new);
-        }
-        int nextPowerOfTwo = Integer.highestOneBit(N) * 2; // Ближайшая степень двойки
-        return Arrays.stream(Arrays.copyOf(signal, nextPowerOfTwo)).mapToObj(
-                x -> new Complex(x, 0)).toArray(Complex[]::new);
-    }
-
     // Дискретное преобразование Фурье (ДПФ)
     public static Complex[] dft(final Complex[] signal) {
         int N = signal.length;
